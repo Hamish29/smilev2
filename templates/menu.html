@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>smile | home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>
+    <link href="{{ url_for('static', filename='smile.css') }}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <h1>smile</h1>
+        <h2>menu</h2>
+    </header>
+    <nav>
+        <a href="/">home</a> &#8226;
+        <a href="/menu">menu</a> &#8226;
+        <a href="/contact">contact</a>
+    </nav>
+    <main>
+
+        <div class="product-box">
+            <h3>Flat white</h3>
+            <p>Definitely created in New Zealand (not in the West Island) - a classic. </p>
+            <p><strong>Volume: </strong>180mL</p>
+            <p><strong>Price: </strong>$4.00</p>
+            <img src="static/images/flatwhite.jpg">
+        </div>
+
+        <div class="product-box">
+            <h3>Chemex</h3>
+            <p>The most beautiful pourover method, in our opinion. The thicker chemex removes most of the oils from the coffee, giving a lighter mouthfeel. We brew our pourovers with a 1:16 ratio. </p>
+            <p><strong>Volume: </strong>400mL</p>
+            <p><strong>Price: </strong>$5.00</p>
+            <img src="static/images/chemex.jpg">
+        </div>
+
+    </main>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+
+</html>
