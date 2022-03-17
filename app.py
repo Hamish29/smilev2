@@ -18,9 +18,10 @@ def create_connection(db_file):
 
     return None
 
+
 @app.route('/')
 def render_homepage():
-    return render_template("home.html")
+    return render_template('home.html')
 
 
 @app.route('/menu')
@@ -44,5 +45,9 @@ def render_menu_page():
 def render_contact():
     return render_template("contact.html")
 
+
+@app.route('/login')
+def render_login_page():
+    return render_template('login.html')
 
 app.run(host="0.0.0.0")
