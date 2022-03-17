@@ -23,21 +23,15 @@
     </nav>
     <main>
 
+        {%  for product in products %}
         <div class="product-box">
-            <h3>Flat white</h3>
-            <p>Definitely created in New Zealand (not in the West Island) - a classic. </p>
-            <p><strong>Volume: </strong>180mL</p>
-            <p><strong>Price: </strong>$4.00</p>
-            <img src="static/images/flatwhite.jpg">
+            <h3>{{ product[0] }}</h3>
+            <p>{{ product[1] }} </p>
+            <p><strong>Volume: </strong>{{ product[2] }}</p>
+            <p><strong>Price: </strong>{{ product[3] }}</p>
+            <img src="static/images/{{ product[4] }}.jpg">
         </div>
-
-        <div class="product-box">
-            <h3>Chemex</h3>
-            <p>The most beautiful pourover method, in our opinion. The thicker chemex removes most of the oils from the coffee, giving a lighter mouthfeel. We brew our pourovers with a 1:16 ratio. </p>
-            <p><strong>Volume: </strong>400mL</p>
-            <p><strong>Price: </strong>$5.00</p>
-            <img src="static/images/chemex.jpg">
-        </div>
+        {% endfor %}
 
     </main>
 </div>
