@@ -23,7 +23,7 @@ def create_connection(db_file):
 
 @app.route('/')
 def render_homepage():
-    return render_template('home.html')
+    return render_template('home.html', logged_in=is_logged_in())
 
 
 @app.route('/menu')
@@ -39,21 +39,24 @@ def render_menu_page():
     product_list = cur.fetchall()  # Puts the results into a list usable in python
     con.close()
 
-    return render_template("menu.html", products=product_list)
+    return render_template("menu.html", products=product_list, logged_in=is_logged_in())
 
 
 @app.route('/contact')
 def render_contact():
-    return render_template("contact.html")
+    return render_template("contact.html", logged_in=is_logged_in())
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def render_login_page(logged_in=None):
+def render_login_page():
+    if is_logged_in():
+        return redirect('/')
+
     if request.method == "POST":
         email = request.form['email'].strip().lower()
         password = request.form['password'].strip()
 
-        query = "SELECT id, fname, password, FROM customer WHERE eamil = ? """
+        query = """SELECT id, fname, password, FROM customer WHERE eamil = ? """
         con = create_connection(DB_NAME)
         cur = con.cursor()
         cur.execute(query, (email,))
@@ -102,7 +105,8 @@ def render_signup_page():
         con = create_connection(DB_NAME)
 
         # SELECT the things you want from your table(s)
-        query = "INSERT INTO customer (id, fname, lname, email, password)  VALUES (NULL,?,?,?,?)"
+        query = "INSERT INTO customer (id, fname, lname, email, password)  " \
+                "VALUES (NULL,?,?,?,?)"
 
         cur = con.cursor()  # You need this line next
         try:
@@ -112,16 +116,25 @@ def render_signup_page():
             return redirect('/signup?error=Email+is+already+used')
         con.commit()
         con.close()
-        return redirect('login')
+        return redirect('/login')
 
-    return render_template('signup.html')
+    return render_template('signup.html', logged_in=is_logged_in())
 
 
-@app.route('logout')
+@app.route('/logout')
 def logout():
     print(list(session.keys()))
-    [session.pop(key) for key in lists (session.keys())]
+    [session.pop(key) for key in list(session.keys())]
     print(list(session.keys()))
+    return redirect(request.refferer + '?message=See+you+next+time!')
+
+def is_logged_in():
+    if session.get("email") is None:
+        print("not logged in")
+        return False
+    else:
+        print("logged in")
+        return True
 
 
-app.run(host="0.0.0.0")
+app.run(host='0.0.0.0', debug = True)
