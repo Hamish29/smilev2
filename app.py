@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, session, redirect
 import sqlite3
 from sqlite3 import Error
+from flask_bcrypt import Bcrypt
 
 DB_NAME = "C:/Users/18202/PycharmProjects/smilev2/smile.db"
 # DB_NAME = "smile.db"
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 app.secret_key = " Hammybrrr"
 
 
@@ -71,11 +73,8 @@ def render_login_page():
         except IndexError:
             return redirect("/login?error=Email+invalid+or+password+incorrect")
 
-
-        if db_password != password:
-            return redirect("/login?error=Email+invalid+or+password+incorrect")
-
-
+        if not bcrypt.check_password_hash(db_password, password):
+            return redirect(request.referrer + "?error=Email+invalid+or+password+incorrect")
 
         session['email'] = email
         session['userid'] = userid
@@ -83,7 +82,6 @@ def render_login_page():
         print(session)
         return redirect('/')
     return render_template('login.html', logged_in=is_logged_in())
-
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -102,6 +100,7 @@ def render_signup_page():
         if len(password) < 8:
             return redirect('/signup?error=Password+must+be+8+character+or+more')
 
+        hashed_password = bcrypt.generate_password_hash(passowrd)
         con = create_connection(DB_NAME)
 
         # SELECT the things you want from your table(s)
@@ -110,7 +109,7 @@ def render_signup_page():
 
         cur = con.cursor()  # You need this line next
         try:
-             cur.execute(query, (fname, lname, email, password))  # This line actually executes the query
+             cur.execute(query, (fname, lname, email, hashed_password))  # This line actually executes the query
 
         except sqlite3.IntegrityError:
             return redirect('/signup?error=Email+is+already+used')
