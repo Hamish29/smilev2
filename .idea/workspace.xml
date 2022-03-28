@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74223342-9eba-4bba-a983-3e8752725380" name="Changes" comment="Flask 9 and 10 updates">
+    <list default="true" id="74223342-9eba-4bba-a983-3e8752725380" name="Changes" comment="Flask 11 updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smile.db" beforeDir="false" afterPath="$PROJECT_DIR$/smile.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/smile.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/smile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/menu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +104,9 @@
       <workItem from="1647897772702" duration="2914000" />
       <workItem from="1647998797125" duration="639000" />
       <workItem from="1647999454273" duration="2263000" />
-      <workItem from="1648081862702" duration="2671000" />
+      <workItem from="1648081862702" duration="2989000" />
+      <workItem from="1648420696736" duration="2793000" />
+      <workItem from="1648502332852" duration="800000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1647479201105</created>
@@ -134,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648001704256</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Flask 11 updates">
+      <created>1648084838673</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1648084838673</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,9 +166,10 @@
     <MESSAGE value="Pushing Smile-Copy" />
     <MESSAGE value="Flask 8 and 9 updates" />
     <MESSAGE value="Flask 9 and 10 updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Flask 9 and 10 updates" />
+    <MESSAGE value="Flask 11 updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Flask 11 updates" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/smilev2$Smile___Copy.coverage" NAME="Smile - Copy Coverage Results" MODIFIED="1648083886426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/smilev2$Smile___Copy.coverage" NAME="Smile - Copy Coverage Results" MODIFIED="1648502390693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
