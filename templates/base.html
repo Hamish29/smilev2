@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>smile | home</title>
+    <title>Hamish's Smile Cafe | Contact</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>
@@ -11,21 +11,27 @@
 </head>
 
 <body>
-<nav>
-    <a href="/">home</a><a href="/menu">menu</a><a href="/contact">contact</a>{% if logged_in %} <a href="/logout">log out</a>{% else %}<a href="/login">log in</a>
-    {% endif %}
+    <nav>
+        <a href="/">home</a><a href="/menu">menu</a>
+        <a href="/contact">contact</a>
+        {% if logged_in %}
+            <a href="/logout">Log Out</a>
+        {% else %}
+            <a href="/login">Log In</a>
+        {% endif %}
 
-</nav>
+    </nav>
 <div class="container">
     <header>
-        <h1>smile</h1>
-        <h2>{% block pageheading  %}{% endblock %}</h2>
+        <h1>Hamish's Smile Cafe</h1>
+        <h2>{% block pageheading %}{% endblock %}</h2>
     </header>
 
     <main>
         {% if logged_in %}
         <strong>Hello, {{ session.firstname }}</strong>
         {% endif %}
+
         {% block main %}
         {% endblock %}
     </main>
