@@ -3,6 +3,10 @@ import sqlite3
 from sqlite3 import Error
 from flask_bcrypt import Bcrypt
 from datetime import datetime
+import smtplib, ssl
+from smtplib import SMTPAuthenticationError
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 DB_NAME = "C:/Users/18202/PycharmProjects/smilev2/smile.db"
 #DB_NAME = "smile.db"
@@ -22,6 +26,48 @@ def create_connection(db_file):
         print(e)
 
     return None
+
+def send_confirmation(order_info):
+   print(order_info)
+   email = session['email']
+   firstname = session['firstname']
+   SSL_PORT = 465  # For SSL
+
+   sender_email = input("Gmail address: ").strip()
+   sender_password = input("Gmail password: ").strip()
+   table = "<table>\n<tr><th>Name</th><th>Quantity</th><th>Price</th><th>Order total</th></tr>\n"
+   total = 0
+   for product in order_info:
+       name = product[2]
+       quantity = product[1]
+       price = product[3]
+       subtotal = product[3] * product[1]
+       total += subtotal
+       table += "<tr><td>{}</td><td>{}</td><td>{:.2f}</td><td>{:.2f}</td></tr>\n".format(name, quantity, price,subtotal)
+   table += "<tr><td></td><td></td><td>Total:</td><td>{:.2f}</td></tr>\n</table>".format(total)
+   print(table)
+   print(total)
+   html_text = """<p>Hello {}.</p>
+   <p>Thank you for shopping at smile cafe. Your order summary:</p>"
+   {}
+   <p>Thank you, <br>The staff at smile cafe.</p>""".format(firstname, table)
+   print(html_text)
+
+   context = ssl.create_default_context()
+   message = MIMEMultipart("alternative")
+   message["Subject"] = "Your order with smile"
+
+   message["From"] = "smile cafe"
+   message["To"] = email
+
+   html_content = MIMEText(html_text, "html")
+   message.attach(html_content)
+   with smtplib.SMTP_SSL("smtp.gmail.com", SSL_PORT, context=context) as server:
+       try:
+           server.login(sender_email, sender_password)
+           server.sendmail(sender_email, email, message.as_string())
+       except SMTPAuthenticationError as e:
+           print(e)
 
 
 @app.route('/')
@@ -171,6 +217,93 @@ def addtocart(productid):
     con.commit()
     con.close()
     return redirect('/menu')
+
+
+@app.route('/cart')
+def render_cart():
+    userid = session['userid']
+    query = "SELECT productid FROM cart WHERE userid=?;"
+    con = create_connection(DB_NAME)
+    cur = con.cursor()
+    cur.execute(query, (userid, ))
+    product_ids = cur.fetchall()
+    print(product_ids)   # U - G - L - Y
+
+    # the results from the query are a list of sets, loop through and pull out the ids
+    for i in range(len(product_ids)):
+        product_ids[i] = product_ids[i][0]
+    print(product_ids)
+
+    unique_product_ids = list(set(product_ids))
+    print(unique_product_ids)
+
+    for i in range(len(unique_product_ids)):
+        product_count = product_ids.count(unique_product_ids[i])
+        unique_product_ids[i] = [unique_product_ids[i], product_count]
+    print(unique_product_ids)
+
+    query = """SELECT name, price FROM product WHERE id=?;"""
+    for item in unique_product_ids:
+        cur.execute(query, (item[0]))    # item[0] os the productid
+        item_details = cur.fetchall()    # this transforms the result into a python list
+        print(item_details)              # this will print something like [('Latte', 4)]
+        item.append(item_details[0][0])  # add the product name to the list
+        item.append(item_details[0][1])  # add the price to the list
+
+    con.close()
+    print(unique_product_ids)  # check out the output now - then you will see what has happened!
+
+    return render_template('cart.html', cart_data=unique_product_ids, logged_in=is_logged_in())
+
+@app.route('/removeonefromcart/<product_id>')
+def render_remove_page(product_id):
+    print("Remove item {}".format(product_id))
+    customer_id = session['customerid']
+    query = "DELETE FROM cart WHERE id =(SELECT MIN(id) FROM cart WHERE proudctid=? and customerid=?);"
+    con = create_connection(DB_NAME)
+    cur = con.curson()
+    cur.execute(query, (product_id, customer_id))
+    con.commit()
+    con.close()
+    return redirect('/cart')
+
+
+@app.route('/confirmorder')
+def confirmorder():
+   userid = session['userid']
+   query = "SELECT productid FROM cart WHERE userid=?;"
+   con = create_connection(DB_NAME)
+   cur = con.cursor()
+   cur.execute(query, (userid,))
+   product_ids = cur.fetchall()
+   print(product_ids)  # U - G - L - Y
+
+   if len(product_ids) == 0:
+       return redirect('/menu?error=Cart+empty')
+
+   # convert the result to a nice list
+   for i in range(len(product_ids)):
+       product_ids[i] = product_ids[i][0]
+
+   unique_product_ids = list(set(product_ids))
+
+   for i in range(len(unique_product_ids)):
+       product_count = product_ids.count(unique_product_ids[i])
+       unique_product_ids[i] = [unique_product_ids[i], product_count]
+
+   query = """SELECT name, price FROM product WHERE id = ?;"""
+   for item in unique_product_ids:
+       cur.execute(query, (item[0],))   # item[0] is the productid
+       item_details = cur.fetchall()    # create a list
+       item.append(item_details[0][0])  # add the product name to the list
+       item.append(item_details[0][1])  # add the price to the list
+
+   query = "DELETE FROM cart WHERE userid=?;"
+   cur.execute(query, (userid,))
+   con.commit()
+   con.close()
+   send_confirmation(unique_product_ids)
+   return redirect('/?message=Order+complete')
 
 
 app.run(host="0.0.0.0", debug=True)
