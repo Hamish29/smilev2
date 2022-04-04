@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74223342-9eba-4bba-a983-3e8752725380" name="Changes" comment="Added cart slides">
+    <list default="true" id="74223342-9eba-4bba-a983-3e8752725380" name="Changes" comment="fixed cart (somewhat)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smile.db" beforeDir="false" afterPath="$PROJECT_DIR$/smile.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/menu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/menu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +110,8 @@
       <workItem from="1648604771937" duration="365000" />
       <workItem from="1648605153402" duration="1551000" />
       <workItem from="1648686804330" duration="2742000" />
-      <workItem from="1649028936297" duration="3145000" />
+      <workItem from="1649028936297" duration="3359000" />
+      <workItem from="1649110745654" duration="2881000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1647479201105</created>
@@ -177,7 +176,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648689516396</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixed cart (somewhat)">
+      <created>1649032292156</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1649032292156</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,9 +211,10 @@
     <MESSAGE value="made sign up" />
     <MESSAGE value="Fixed login" />
     <MESSAGE value="Added cart slides" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added cart slides" />
+    <MESSAGE value="fixed cart (somewhat)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed cart (somewhat)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/smilev2$Smile___Copy.coverage" NAME="Smile - Copy Coverage Results" MODIFIED="1649032075920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/smilev2$Smile___Copy.coverage" NAME="Smile - Copy Coverage Results" MODIFIED="1649113605292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

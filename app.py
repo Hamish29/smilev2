@@ -259,7 +259,7 @@ def render_cart():
 def render_remove_page(product_id):
     print("Remove item {}".format(product_id))
     customer_id = session['userid']
-    query = "DELETE FROM cart WHERE id =(SELECT MIN(id) FROM cart WHERE proudctid=? and customerid=?);"
+    query = "DELETE FROM cart WHERE id =(SELECT MIN(id) FROM cart WHERE productid=? and userid=?);"
     con = create_connection(DB_NAME)
     cur = con.cursor()
     cur.execute(query, (product_id, customer_id))

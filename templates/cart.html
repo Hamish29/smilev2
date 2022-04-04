@@ -2,6 +2,9 @@
 
 {% block pageheading %}cart{% endblock %}
 {% block main %}
+    <div class="message">{{ message }}</div>
+    <div class="error">{{ error }}</div>
+    <div>Cart for {{ session['fname'] }}</div>
     <table class="cart-table">
         <thead>
             <tr>
@@ -13,6 +16,7 @@
             </tr>
         </thead>
         <tbody>
+        {% set ns=namespace(total=0) %}
         {% for item in cart_data %}
             <tr>
                 <td>{{ item[2] }}</td>
@@ -20,13 +24,14 @@
                 <td>${{ "{:.2f}".format(item[3]) }}</td>
                 <td>${{ "{:.2f}".format(item[3] * item[1]) }}</td>
                 <td><a href="removeonefromcart/{{ item[0] }}">X</a></td>
+                {% set ns.total = ns.total + item[3] * item[1] %}
             </tr>
         {% endfor %}
             <tr>
                 <td></td>
                 <td></td>
                 <td>Total</td>
-                <td>${{ total_price }}</td>
+                <td>${{ "{:.2f}".format(ns.total) }}</td>
                 <td><a href="confirmorder">CONFIRM</a></td>
             </tr>
         </tbody>
