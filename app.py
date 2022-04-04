@@ -82,7 +82,7 @@ def render_menu_page():
     con = create_connection(DB_NAME)
     print("tried connection")
     # SELECT the things you want from your table(s)
-    query = "SELECT name, description, volume, price, image FROM product"
+    query = "SELECT id, name, description, volume, price, image FROM product"
 
     cur = con.cursor()  # You need this line next
     cur.execute(query)  # This line actually executes the query
@@ -244,7 +244,7 @@ def render_cart():
 
     query = """SELECT name, price FROM product WHERE id=?;"""
     for item in unique_product_ids:
-        cur.execute(query, (item[0]))    # item[0] os the productid
+        cur.execute(query, (item[0],))    # item[0] os the productid
         item_details = cur.fetchall()    # this transforms the result into a python list
         print(item_details)              # this will print something like [('Latte', 4)]
         item.append(item_details[0][0])  # add the product name to the list
@@ -258,10 +258,10 @@ def render_cart():
 @app.route('/removeonefromcart/<product_id>')
 def render_remove_page(product_id):
     print("Remove item {}".format(product_id))
-    customer_id = session['customerid']
+    customer_id = session['userid']
     query = "DELETE FROM cart WHERE id =(SELECT MIN(id) FROM cart WHERE proudctid=? and customerid=?);"
     con = create_connection(DB_NAME)
-    cur = con.curson()
+    cur = con.cursor()
     cur.execute(query, (product_id, customer_id))
     con.commit()
     con.close()
