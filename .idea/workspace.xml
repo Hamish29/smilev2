@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74223342-9eba-4bba-a983-3e8752725380" name="Changes" comment="fixed cart (somewhat)">
+    <list default="true" id="74223342-9eba-4bba-a983-3e8752725380" name="Changes" comment="Fixed delete button and total price for cart">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smile.db" beforeDir="false" afterPath="$PROJECT_DIR$/smile.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +110,8 @@
       <workItem from="1648605153402" duration="1551000" />
       <workItem from="1648686804330" duration="2742000" />
       <workItem from="1649028936297" duration="3359000" />
-      <workItem from="1649110745654" duration="2881000" />
+      <workItem from="1649110745654" duration="3161000" />
+      <workItem from="1649212220813" duration="2234000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1647479201105</created>
@@ -183,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649032292156</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixed delete button and total price for cart">
+      <created>1649113898957</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1649113898957</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,9 +219,10 @@
     <MESSAGE value="Fixed login" />
     <MESSAGE value="Added cart slides" />
     <MESSAGE value="fixed cart (somewhat)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed cart (somewhat)" />
+    <MESSAGE value="Fixed delete button and total price for cart" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed delete button and total price for cart" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/smilev2$Smile___Copy.coverage" NAME="Smile - Copy Coverage Results" MODIFIED="1649113605292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/smilev2$Smile___Copy.coverage" NAME="Smile - Copy Coverage Results" MODIFIED="1649213861797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

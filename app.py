@@ -28,46 +28,46 @@ def create_connection(db_file):
     return None
 
 def send_confirmation(order_info):
-   print(order_info)
-   email = session['email']
-   firstname = session['firstname']
-   SSL_PORT = 465  # For SSL
+    print(order_info)
+    email = session['email']
+    firstname = session['firstname']
+    SSL_PORT = 465  # For SSL
 
-   sender_email = input("Gmail address: ").strip()
-   sender_password = input("Gmail password: ").strip()
-   table = "<table>\n<tr><th>Name</th><th>Quantity</th><th>Price</th><th>Order total</th></tr>\n"
-   total = 0
-   for product in order_info:
-       name = product[2]
-       quantity = product[1]
-       price = product[3]
-       subtotal = product[3] * product[1]
-       total += subtotal
-       table += "<tr><td>{}</td><td>{}</td><td>{:.2f}</td><td>{:.2f}</td></tr>\n".format(name, quantity, price,subtotal)
-   table += "<tr><td></td><td></td><td>Total:</td><td>{:.2f}</td></tr>\n</table>".format(total)
-   print(table)
-   print(total)
-   html_text = """<p>Hello {}.</p>
-   <p>Thank you for shopping at smile cafe. Your order summary:</p>"
-   {}
-   <p>Thank you, <br>The staff at smile cafe.</p>""".format(firstname, table)
-   print(html_text)
+    sender_email = input("Gmail address: ").strip()
+    sender_password = input("Gmail password: ").strip()
+    table = "<table>\n<tr><th>Name</th><th>Quantity</th><th>Price</th><th>Order total</th></tr>\n"
+    total = 0
+    for product in order_info:
+        name = product[2]
+        quantity = product[1]
+        price = product[3]
+        subtotal = product[3] * product[1]
+        total += subtotal
+        table += "<tr><td>{}</td><td>{}</td><td>{:.2f}</td><td>{:.2f}</td></tr>\n".format(name, quantity, price, subtotal)
+    table += "<tr><td></td><td></td><td>Total:</td><td>{:.2f}</td></tr>\n</table>".format(total)
+    print(table)
+    print(total)
+    html_text = """<p>Hello {}.</p>
+    <p>Thank you for shopping at smile cafe. Your order summary:</p>"
+    {}
+    <p>Thank you, <br>The staff at smile cafe.</p>""".format(firstname, table)
+    print(html_text)
 
-   context = ssl.create_default_context()
-   message = MIMEMultipart("alternative")
-   message["Subject"] = "Your order with smile"
+    context = ssl.create_default_context()
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "Your order with smile"
 
-   message["From"] = "smile cafe"
-   message["To"] = email
+    message["From"] = "smile cafe"
+    message["To"] = email
 
-   html_content = MIMEText(html_text, "html")
-   message.attach(html_content)
-   with smtplib.SMTP_SSL("smtp.gmail.com", SSL_PORT, context=context) as server:
-       try:
-           server.login(sender_email, sender_password)
-           server.sendmail(sender_email, email, message.as_string())
-       except SMTPAuthenticationError as e:
-           print(e)
+    html_content = MIMEText(html_text, "html")
+    message.attach(html_content)
+    with smtplib.SMTP_SSL("smtp.gmail.com", SSL_PORT, context=context) as server:
+        try:
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, email, message.as_string())
+        except SMTPAuthenticationError as e:
+            print(e)
 
 
 @app.route('/')
@@ -221,6 +221,8 @@ def addtocart(productid):
 
 @app.route('/cart')
 def render_cart():
+    if not is_logged_in():
+        return  redirect('/menu')
     userid = session['userid']
     query = "SELECT productid FROM cart WHERE userid=?;"
     con = create_connection(DB_NAME)
